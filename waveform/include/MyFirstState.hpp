@@ -55,6 +55,7 @@ private:
 
     Waveform m_waveform;
     sf::RenderTexture m_texture;
+    xy::Entity m_waveformEntity;
 
     void buildScene();
 };

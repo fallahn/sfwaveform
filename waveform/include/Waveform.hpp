@@ -21,6 +21,7 @@ public:
 
     void update();
 
+    void setVerticalScale(float);
 
 private:
 
@@ -36,5 +37,6 @@ private:
     bool m_fileOpen;
     std::vector<sf::Vertex> m_vertices;
     std::size_t m_vertexHead;
+    float m_verticalScale;
     void draw(sf::RenderTarget&, sf::RenderStates) const override;
 };

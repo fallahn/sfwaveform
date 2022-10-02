@@ -27,6 +27,8 @@ source distribution.
 #include "MyFirstState.hpp"
 #include "States.hpp"
 
+#include <SFML/OpenGL.hpp>
+
 #include <xyginext/gui/Gui.hpp>
 #include <xyginext/core/FileSystem.hpp>
 #include <xyginext/graphics/postprocess/Bloom.hpp>
@@ -40,6 +42,12 @@ source distribution.
 #include <xyginext/ecs/components/Drawable.hpp>
 #include <xyginext/ecs/components/Camera.hpp>
 #include <xyginext/ecs/components/Transform.hpp>
+
+namespace
+{
+    float lineThickness = 5.f;
+    float verticalScale = 1.f;
+}
 
 MyFirstState::MyFirstState(xy::StateStack& ss, xy::State::Context ctx) 
     : xy::State (ss, ctx),
@@ -57,15 +65,30 @@ MyFirstState::MyFirstState(xy::StateStack& ss, xy::State::Context ctx)
                         m_waveform.openFromFile(path);
                     }
                 }
-
+                ImGui::SameLine();
                 if (ImGui::Button("Play"))
                 {
                     m_waveform.play();
                 }
-
+                ImGui::SameLine();
                 if (ImGui::Button("Stop"))
                 {
                     m_waveform.stop();
+                }
+
+                ImGui::SliderFloat("Line Thickness", &lineThickness, 1.f, 10.f);
+                if (ImGui::SliderFloat("Vertical Scale", &verticalScale, -1.f, 1.f))
+                {
+                    m_waveform.setVerticalScale(verticalScale);
+                }
+
+                static float colour[3] = { 1.f, 1.f, 1.f };
+                if (ImGui::ColorEdit3("Colour", colour))
+                {
+                    std::uint8_t r = static_cast<std::uint8_t>(colour[0] * 255.f);
+                    std::uint8_t g = static_cast<std::uint8_t>(colour[1] * 255.f);
+                    std::uint8_t b = static_cast<std::uint8_t>(colour[2] * 255.f);
+                    m_waveformEntity.getComponent<xy::Sprite>().setColour({ r,g,b });
                 }
             }
             ImGui::End();
@@ -96,6 +119,7 @@ bool MyFirstState::update(float dt)
 
 void MyFirstState::draw()
 {
+    glLineWidth(lineThickness);
     m_texture.clear();
     m_texture.draw(m_waveform);
     m_texture.display();
@@ -123,10 +147,11 @@ void MyFirstState::buildScene()
     m_scene.addSystem<xy::CameraSystem>(mb);
     m_scene.addSystem<xy::RenderSystem>(mb);
 
-    //m_scene.addPostProcess<xy::PostBloom>();
+    m_scene.addPostProcess<xy::PostBloom>();
 
     auto entity = m_scene.createEntity();
     entity.addComponent<xy::Transform>();
     entity.addComponent<xy::Drawable>();
     entity.addComponent<xy::Sprite>().setTexture(m_texture.getTexture());
+    m_waveformEntity = entity;
 }

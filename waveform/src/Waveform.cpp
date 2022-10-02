@@ -20,9 +20,10 @@ namespace
 }
 
 Waveform::Waveform()
-    : m_file    (),
-    m_fileOpen  (false),
-    m_vertexHead(0)
+    : m_file        (),
+    m_fileOpen      (false),
+    m_vertexHead    (0),
+    m_verticalScale (1.f)
 {
 
 }
@@ -53,18 +54,23 @@ void Waveform::update()
     {
         auto vertexCount = std::min(m_sampleBuffer.size() - m_vertexHead, m_vertices.size() * m_file.getChannelCount());
 
-        float spacing = static_cast<float>(xy::App::getRenderWindow()->getSize().x) / m_vertices.size();
-        float verticalOffset = static_cast<float>(xy::App::getRenderWindow()->getSize().y) / 2.f;
+        const float spacing = static_cast<float>(xy::App::getRenderWindow()->getSize().x) / m_vertices.size();
+        const float verticalOffset = (static_cast<float>(xy::App::getRenderWindow()->getSize().y) / 3.f) * 2.f;
 
         for (auto i = 0u; i < vertexCount; i += m_file.getChannelCount())
         {
             auto index = (i / m_file.getChannelCount());
             m_vertices[index].position.x = spacing * index;
-            m_vertices[index].position.y = verticalOffset + (static_cast<float>(m_sampleBuffer[m_vertexHead + i]) / 70.f);
+            m_vertices[index].position.y = verticalOffset + ((static_cast<float>(m_sampleBuffer[m_vertexHead + i]) / 70.f) * m_verticalScale);
         }
 
         m_vertexHead += vertexCount;
     }
+}
+
+void Waveform::setVerticalScale(float scale)
+{
+    m_verticalScale = std::clamp(scale, -1.f, 1.f);
 }
 
 //private
@@ -99,8 +105,6 @@ void Waveform::initialise()
 {
     m_sampleBuffer.resize(m_file.getSampleRate() * m_file.getChannelCount());
     m_vertices.resize(m_sampleBuffer.size() / 120);
-
-    std::fill(m_vertices.begin(), m_vertices.end(), sf::Vertex(sf::Vector2f(), sf::Color::Green));
 
     SoundStream::initialize(m_file.getChannelCount(), m_file.getSampleRate());
 }
