@@ -105,6 +105,7 @@ void Waveform::initialise()
 {
     m_sampleBuffer.resize(m_file.getSampleRate() * m_file.getChannelCount());
     m_vertices.resize(m_sampleBuffer.size() / 120);
+    m_vertexHead = 0;
 
     SoundStream::initialize(m_file.getChannelCount(), m_file.getSampleRate());
 }
