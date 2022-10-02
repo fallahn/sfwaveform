@@ -215,11 +215,13 @@
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\MyFirstState.hpp" />
     <ClInclude Include="include\States.hpp" />
+    <ClInclude Include="include\Waveform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MyFirstState.cpp" />
+    <ClCompile Include="src\Waveform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

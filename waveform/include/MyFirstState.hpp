@@ -26,10 +26,15 @@ source distribution.
 
 #pragma once
 
+#include "Waveform.hpp"
+
+#include <SFML/Graphics/RenderTexture.hpp>
+
 #include <xyginext/core/State.hpp>
 #include <xyginext/ecs/Scene.hpp>
+#include <xyginext/gui/GuiClient.hpp>
 
-class MyFirstState final : public xy::State
+class MyFirstState final : public xy::State, public xy::GuiClient
 {
 public:
     MyFirstState(xy::StateStack&, xy::State::Context);
@@ -47,4 +52,9 @@ public:
 private:    
 
     xy::Scene m_scene;
+
+    Waveform m_waveform;
+    sf::RenderTexture m_texture;
+
+    void buildScene();
 };
