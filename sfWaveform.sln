@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Waveform", "waveform\Waveform.vcxproj", "{79709FA1-E663-4DF3-98A5-7496EA8E479D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		DebugAsan|x64 = DebugAsan|x64
+		DebugAsan|x86 = DebugAsan|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Debug|x64.ActiveCfg = Debug|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Debug|x64.Build.0 = Debug|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Debug|x86.ActiveCfg = Debug|Win32
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Debug|x86.Build.0 = Debug|Win32
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.DebugAsan|x64.ActiveCfg = DebugAsan|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.DebugAsan|x64.Build.0 = DebugAsan|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.DebugAsan|x86.ActiveCfg = DebugAsan|Win32
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.DebugAsan|x86.Build.0 = DebugAsan|Win32
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Release|x64.ActiveCfg = Release|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Release|x64.Build.0 = Release|x64
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Release|x86.ActiveCfg = Release|Win32
+		{79709FA1-E663-4DF3-98A5-7496EA8E479D}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {711D8305-833D-4280-979C-DAB02D3A4031}
+	EndGlobalSection
+EndGlobal
